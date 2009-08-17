@@ -39,13 +39,13 @@
 
 1: Introduction
 ---------------
-A cellular automata CA) is a discrete model that consists of a grid (1D,
-2D, 3D ) with objects called cells. Each cell can be in one of a given
-set of states (on and off, different colours etc). Each cell has a set
-of cells in close proximity. Given the current internal state of a cell,
-the states of the cells in the close proximity and a given set of update
-rules the next state of a cell can be determined. For more information
-about cellular automata, se [1].
+A cellular automata (CA) is a discrete model that consists of a grid
+(1D, 2D, 3D ) with objects called cells. Each cell can be in one of a
+given finite set of states (on and off, different colours etc). Each
+cell has a set of cells in close proximity called neighbours. Given the
+current internal state of a cell, the states of the cells in the close
+proximity and a given set of update rules the next state of a cell can
+be determined. For more information about cellular automata, se [1].
 
 The ca_prng IP-core implements a 1D binary cellular automata with wrap
 around at the edges (i.e. a ring). The update rules for a given 
@@ -73,7 +73,7 @@ possible bit updates. In total the ca_prng supports 256 update
 rules. For different rules and possible patterns, see [2].
 
 The default update rule used in the ca_prng is rule30. Rule30 is an
-uodate rule that when applied to the CA will produce a class III,
+update rule that when applied to the CA will produce a class III,
 aperiodic, chaotic behaviour. The rule was discovered by Stephen Wolfram
 [3].
 
@@ -81,16 +81,17 @@ aperiodic, chaotic behaviour. The rule was discovered by Stephen Wolfram
 2: IP-core description
 ----------------------
 The ca_prng is a CA with 32 cells, implemented as a 32 bit wide
-register. Each register has separate update logic that looks at the
-current state of the register and its two nearest neighbours (with wrap
-around). Register update latency is one cycle.
+register. Each register (cel) has separate update logic that looks at
+the current state of the register and its two nearest neighbours (with
+wrap around). The total state update latency for all cells is thus one
+cycle.
 
 The actual update of the registers is controlled by external control
 signals that allows a user to set the register initial pattern
 (state) and request generation of new pattern.
 
 Loading of initial pattern is is accomplished by setting the
-input_patter_data port to the desired inital pattern and then
+input_pattern_data port to the desired inital pattern and then
 asserting the load_input_pattern port for one clock cycle.
 
 Requesting a new pattern is accomplished by asserting the next_pattern
@@ -140,7 +141,7 @@ internal registers are equipped with a synhronous, active low reset.
 
 3: IP-core delivery contents
 ----------------------------
-The ca_prng is provided as RTL source code written in Verilog 2001
+The ca_prng core is provided as RTL source code written in Verilog 2001
 compliant code. The ca_prng delivery also contains a testbench that
 verifies the functionality. Finally the core contains a functional model
 written in Python as well as documentation (this file).
@@ -149,7 +150,8 @@ The provided testbench has been used to verify the core using the
 ModelSim as well as the Icarus Verilog simulators. 
 
 The ca_prng core has been implemented in FPGA tools from Altera and
-Xilinx. The following table lists the area and speed achieved.
+Xilinx. The following table lists the area and speed achieved for the
+ca_prng core as a stand alone core.
 
 Altera Devices (implemented using Quartus 9.0)
 Stratix II
