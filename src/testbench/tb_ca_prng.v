@@ -45,7 +45,7 @@
 
 
 //------------------------------------------------------------------
-// tb_rule30
+// tb_ca_prng
 //
 // The self contained testbench module.
 //------------------------------------------------------------------
@@ -126,6 +126,7 @@ module tb_ca_prng();
   ca_prng ca_prng_dut(
                       .clk(tb_clk),
                       .reset_n(tb_reset_n),
+
                       .init_pattern_data(tb_init_pattern_data),
                       .load_init_pattern(tb_load_init_pattern),
                       .next_pattern(tb_next_pattern),

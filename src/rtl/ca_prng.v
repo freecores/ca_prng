@@ -39,18 +39,18 @@
 //========================================================================
 
 module ca_prng(
-              input wire [31 : 0]  init_pattern_data,
-              input wire           load_init_pattern,
-              input wire           next_pattern,
+               input wire           clk,
+               input wire           reset_n,
 
-              input wire [7 : 0]   update_rule,
-              input wire           load_update_rule,
+               input wire [31 : 0]  init_pattern_data,
+               input wire           load_init_pattern,
+               input wire           next_pattern,
 
-              output wire [31 : 0] prng_data,
+               input wire [7 : 0]   update_rule,
+               input wire           load_update_rule,
 
-              input wire clk,
-              input wire reset_n
-             );
+               output wire [31 : 0] prng_data
+              );
 
 
   //--------------------------------------------------------------------
